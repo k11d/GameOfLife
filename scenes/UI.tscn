@@ -18,81 +18,81 @@ __meta__ = {
 }
 
 [node name="GenCounter" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 73.0
-margin_bottom = 55.0
+margin_right = 91.0
+margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="HBoxContainer/GenCounter"]
 margin_top = 3.0
-margin_right = 53.0
-margin_bottom = 52.0
+margin_right = 67.0
+margin_bottom = 63.0
 text = "Gen:"
 
 [node name="Value" type="Label" parent="HBoxContainer/GenCounter"]
-margin_left = 57.0
+margin_left = 71.0
 margin_top = 3.0
-margin_right = 73.0
-margin_bottom = 52.0
+margin_right = 91.0
+margin_bottom = 63.0
 text = "0"
 
 [node name="Separator" type="Label" parent="HBoxContainer"]
-margin_left = 77.0
+margin_left = 95.0
 margin_top = 3.0
-margin_right = 114.0
-margin_bottom = 52.0
+margin_right = 106.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 
 [node name="ButtonPlay" type="Button" parent="HBoxContainer"]
-margin_left = 118.0
-margin_right = 185.0
-margin_bottom = 55.0
+margin_left = 110.0
+margin_right = 192.0
+margin_bottom = 66.0
 text = "Play"
 
 [node name="ButtonNext" type="Button" parent="HBoxContainer"]
-margin_left = 189.0
-margin_right = 268.0
-margin_bottom = 55.0
+margin_left = 196.0
+margin_right = 291.0
+margin_bottom = 66.0
 text = "Next"
 
 [node name="Separator2" type="Label" parent="HBoxContainer"]
-margin_left = 272.0
+margin_left = 295.0
 margin_top = 3.0
-margin_right = 309.0
-margin_bottom = 52.0
+margin_right = 306.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 
 [node name="Add" type="Button" parent="HBoxContainer"]
-margin_left = 313.0
-margin_right = 373.0
-margin_bottom = 55.0
+margin_left = 310.0
+margin_right = 370.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 60, 0 )
 text = "+"
 
 [node name="Both" type="Button" parent="HBoxContainer"]
 self_modulate = Color( 0, 1, 0.156863, 1 )
-margin_left = 377.0
-margin_right = 438.0
-margin_bottom = 55.0
+margin_left = 374.0
+margin_right = 444.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 60, 0 )
 text = "+/-"
 
 [node name="Remove" type="Button" parent="HBoxContainer"]
-margin_left = 442.0
-margin_right = 502.0
-margin_bottom = 55.0
+margin_left = 448.0
+margin_right = 508.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 60, 0 )
 text = "-"
 
 [node name="Separator3" type="Label" parent="HBoxContainer"]
-margin_left = 506.0
+margin_left = 512.0
 margin_top = 3.0
-margin_right = 543.0
-margin_bottom = 52.0
+margin_right = 523.0
+margin_bottom = 63.0
 size_flags_horizontal = 3
 
 [node name="ButtonReset" type="Button" parent="HBoxContainer"]
-margin_left = 547.0
-margin_right = 636.0
-margin_bottom = 55.0
+margin_left = 527.0
+margin_right = 635.0
+margin_bottom = 66.0
 text = "Reset"
 
 [connection signal="pressed" from="HBoxContainer/ButtonPlay" to="." method="_on_ButtonPlay_pressed"]
