@@ -8,7 +8,7 @@ export(bool) var state := false setget set_state
 var grid_position : Vector2
 
 
-func _on_Area2D_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_Area2D_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			var _st = GameManager.select_cell(self)

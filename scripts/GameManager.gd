@@ -46,7 +46,7 @@ func _ready() -> void:
 	timer = Timer.new()
 	timer.wait_time = 0.3
 	get_node("/root/Main").add_child(timer)
-	timer.connect("timeout", self, "compute_next_generation")
+	var _err = timer.connect("timeout", self, "compute_next_generation")
 
 func update_cells_colors(alive : Color, dead : Color) -> void:
 	for cell in cells_dict.values():
