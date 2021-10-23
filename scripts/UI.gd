@@ -2,6 +2,8 @@ extends CanvasLayer
 class_name UI
 
 
+func _ready() -> void:
+	var _err = GameManager.connect("next_generation", self, "on_next_generation_update")
 
 func _on_Both_pressed() -> void:
 	GameManager.toggle_dual_cell_mode()
@@ -29,7 +31,6 @@ func _on_ButtonReset_pressed() -> void:
 	GameManager.reset_grid()
 	if $HBoxContainer/ButtonPlay.text == "Pause":
 		GameManager.compute_next_generation()
-		$HBoxContainer/GenCounter/Value.text = str(int($HBoxContainer/GenCounter/Value.text) + 1)
 
 
 func _on_ButtonPlay_pressed() -> void:
@@ -45,7 +46,8 @@ func _on_ButtonPlay_pressed() -> void:
 
 func _on_ButtonNext_pressed() -> void:
 	GameManager.compute_next_generation()
+
+func on_next_generation_update() -> void:
 	$HBoxContainer/GenCounter/Value.text = str(int($HBoxContainer/GenCounter/Value.text) + 1)
-
-
+	
 

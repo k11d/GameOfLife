@@ -40,7 +40,7 @@ var mouse_click_held := false
 var mouse_drag_state := true
 var touch_event_mode = -1 # 0: remove mode, 1: add mode, -1: both
 var timer : Timer
-
+signal next_generation
 
 func _ready() -> void:
 	timer = Timer.new()
@@ -102,7 +102,6 @@ func reset_grid():
 
 func start_timer() -> void:
 	timer.start()
-	
 
 func stop_timer() -> void:
 	timer.stop()	
