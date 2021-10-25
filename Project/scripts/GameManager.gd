@@ -1,3 +1,4 @@
+# GameManager
 extends Node
 
 
@@ -37,6 +38,7 @@ var clicked_cell = null
 var cells_dict := {}
 var cells_neighbors := {}
 var cells_states_stack := []
+
 var mouse_click_held := false
 var mouse_drag_state := true
 var touch_event_mode = -1 # 0: remove mode, 1: add mode, -1: both
@@ -47,7 +49,7 @@ signal prev_generation
 
 func _ready() -> void:
 	timer = Timer.new()
-	timer.wait_time = 0.3
+	timer.wait_time = 0.2
 	get_node("/root/Main").add_child(timer)
 	var _err = timer.connect("timeout", self, "compute_next_generation")
 
@@ -82,7 +84,6 @@ func update_cells_colors(alive : Color, dead : Color) -> void:
 		cell.state = !cell.state
 		cell.state = !cell.state
 
-
 func select_cell(cell) -> bool:
 	clicked_cell = cell
 	if touch_event_mode == 0:
@@ -92,7 +93,6 @@ func select_cell(cell) -> bool:
 	else:
 		clicked_cell.state = !clicked_cell.state
 	return clicked_cell.state
-
 
 func get_neighbors(cell) -> Array:
 	if !(cell in cells_neighbors):
