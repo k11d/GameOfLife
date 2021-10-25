@@ -42,6 +42,8 @@ var mouse_drag_state := true
 var touch_event_mode = -1 # 0: remove mode, 1: add mode, -1: both
 var timer : Timer
 signal next_generation
+signal prev_generation
+
 
 func _ready() -> void:
 	timer = Timer.new()
@@ -155,4 +157,10 @@ func compute_next_generation() -> void:
 	if len(hist) > 0:
 		cells_states_stack.append(hist)
 	emit_signal("next_generation")
+
+func step_back_generation() -> void:
+	if len(cells_states_stack) > 0:
+		for cell in cells_states_stack.pop_back():
+			cell.state = !cell.state
+		emit_signal("prev_generation")
 
