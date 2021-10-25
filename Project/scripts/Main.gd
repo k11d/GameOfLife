@@ -13,10 +13,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().quit()
 
 
-func _on_ViewportContainer_resized() -> void:
-	print("viewport resized")
-	var win = $ViewportContainer.get_rect().size
-	print(win)
+func _on_GameView_resized() -> void:
+	var win = $GameView.get_rect().size
+	print("Redrawing the grid")
+	init_grid()
 
 
 func init_grid() -> void:
