@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/materials/BackgroundShader.material" type="Material" id=1]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://scenes/UI.tscn" type="PackedScene" id=3]
+
+[node name="Main" type="Node"]
+script = ExtResource( 2 )
+alive_color = Color( 0.223529, 0.839216, 0.682353, 1 )
+
+[node name="UI" parent="." instance=ExtResource( 3 )]
+
+[node name="GameView" type="ViewportContainer" parent="."]
+material = ExtResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 60.0
+margin_right = -10.0
+margin_bottom = -10.0
+mouse_filter = 2
+stretch = true
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="GameView"]
+size = Vector2( 1046, 530 )
+size_override_stretch = true
+handle_input_locally = false
+fxaa = true
+hdr = false
+disable_3d = true
+usage = 0
+render_target_update_mode = 3
+physics_object_picking = true
+
+[node name="Grid" type="Node2D" parent="GameView/Viewport"]
+position = Vector2( 0, 20 )
+
+[connection signal="resized" from="GameView" to="." method="_on_GameView_resized"]
