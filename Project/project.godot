@@ -14,6 +14,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Cell.gd"
 }, {
+"base": "HBoxContainer",
+"class": "DrawControls",
+"language": "GDScript",
+"path": "res://scripts/DrawControls.gd"
+}, {
+"base": "HBoxContainer",
+"class": "PlayControls",
+"language": "GDScript",
+"path": "res://scripts/PlayingControls.gd"
+}, {
 "base": "CanvasLayer",
 "class": "UI",
 "language": "GDScript",
@@ -21,14 +31,18 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Cell": "",
+"DrawControls": "",
+"PlayControls": "",
 "UI": ""
 }
 
 [application]
 
 config/name="GameOfLife"
-run/main_scene="res://scenes/Game.tscn"
-config/icon="res://assets/icon.png"
+run/main_scene="res://scenes/Main.tscn"
+boot_splash/image="res://assets/splash.png"
+boot_splash/bg_color=Color( 0.52549, 0.52549, 0.52549, 1 )
+config/icon="res://assets/icon192.png"
 
 [autoload]
 
@@ -36,11 +50,7 @@ GameManager="*res://scripts/GameManager.gd"
 
 [display]
 
-window/size/width=1920
-window/size/height=1080
-window/size/resizable=false
-window/size/borderless=true
-window/size/fullscreen=true
+window/size/width=1066
 window/handheld/orientation="portrait"
 window/stretch/aspect="keep"
 
