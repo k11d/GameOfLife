@@ -48,6 +48,30 @@ func _ready() -> void:
 	get_node("/root/Main").add_child(timer)
 	var _err = timer.connect("timeout", self, "compute_next_generation")
 
+func create_grid(viewport) -> Dictionary:
+	var count_x = floor(viewport.rect_size.x / cell_size.x)
+	var count_y = floor(viewport.rect_size.y / cell_size.y) - 1
+	var cell_needs_count = count_x * count_y
+	var cell_current_count = len(cells_dict.values())
+	#print("Grid has now: ", cell_current_count, " cell nodes, and needs: ", cell_needs_count)
+	var gpos : Vector2
+	var rpos : Vector2
+	for y in range(count_y):
+		for x in range(count_x):
+			gpos = Vector2(x,y)
+			if gpos in cells_dict.keys():
+				pass
+			rpos = gpos * GameManager.cell_size + GameManager.cell_size / 2
+			cells_dict[gpos] = CELL.instance()
+			cells_dict[gpos].position = rpos
+			cells_dict[gpos].grid_position = gpos
+			cells_dict[gpos].connect("out_of_view", self, "_on_cell_out_of_view")
+	return cells_dict
+
+func _on_cell_out_of_view(cell) -> void:
+	cells_dict.erase(cell.grid_position)
+	cell.queue_free()
+
 func update_cells_colors(alive : Color, dead : Color) -> void:
 	for cell in cells_dict.values():
 		cell.dead_color = dead

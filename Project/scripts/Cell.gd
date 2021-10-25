@@ -6,6 +6,7 @@ export(Color) var dead_color := Color.white setget set_dead_color
 export(Color) var alive_color := Color.aquamarine setget set_alive_color
 export(bool) var state := false setget set_state
 var grid_position : Vector2
+signal out_of_view(me)
 
 
 func _on_Area2D_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -16,7 +17,7 @@ func _on_Area2D_input_event(_viewport: Node, event: InputEvent, _shape_idx: int)
 			GameManager.mouse_drag_state = _st
 		else:
 			GameManager.mouse_click_held = false
-	elif event.is_action_released("click"):
+	if event.is_action_released("click"):
 		GameManager.mouse_click_held = false
 
 
@@ -40,3 +41,6 @@ func _on_Cell_mouse_entered() -> void:
 	if GameManager.mouse_click_held:
 		self.state = GameManager.mouse_drag_state
 
+
+func _on_VisibilityNotifier2D_screen_exited() -> void:
+	emit_signal("out_of_view", self)
