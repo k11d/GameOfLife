@@ -32,10 +32,11 @@ const EXAMPLES = {
 
 
 const CELL := preload("res://scenes/Cell.tscn")
-var CELL_SIZE := Vector2(48,48)
+var cell_size := Vector2(16, 16)
 var clicked_cell = null
-var cells_dict : Dictionary
+var cells_dict := {}
 var cells_neighbors := {}
+var cells_states_stack := []
 var mouse_click_held := false
 var mouse_drag_state := true
 var touch_event_mode = -1 # 0: remove mode, 1: add mode, -1: both
@@ -110,6 +111,12 @@ func get_neighbors(cell) -> Array:
 				cells_neighbors[cell].append(p)
 	return cells_neighbors[cell]
 
+func get_alive_neighbors(cell):
+	var alive_neighbors := []
+	for nsp in get_neighbors(cell):
+		if cells_dict[nsp].state:
+			alive_neighbors.append(cells_dict[nsp])
+	return alive_neighbors
 
 func toggle_add_cell_mode():
 	touch_event_mode = 1
@@ -131,20 +138,21 @@ func stop_timer() -> void:
 	timer.stop()	
 
 func compute_next_generation() -> void:
-	var cells_to_turn_alive := []
-	var cells_to_turn_dead := []
+	var cells_to_switch := []
 	for cell_pos in cells_dict:
-		var ns_pos = get_neighbors(cells_dict[cell_pos])
-		var ns_state := {true:0, false:0}
-		for nsp in ns_pos:
-			ns_state[cells_dict[nsp].state] += 1
-		if (cells_dict[cell_pos].state and (ns_state[true] == 2 or ns_state[true] == 3)) or (!cells_dict[cell_pos].state and ns_state[true] == 3):
-			cells_to_turn_alive.append(cells_dict[cell_pos])
+		var cell = cells_dict[cell_pos]
+		var alive_neighbors = get_alive_neighbors(cell)
+		if (cell.state and (len(alive_neighbors) == 2 or len(alive_neighbors) == 3)) or (!cell.state and len(alive_neighbors) == 3):
+			if !cell.state:
+				cells_to_switch.append(cell)
 		else:
-			cells_to_turn_dead.append(cells_dict[cell_pos])
-	for cell in cells_to_turn_alive:
-		cell.state = true
-	for cell in cells_to_turn_dead:
-		cell.state = false
+			if cell.state:
+				cells_to_switch.append(cell)
+	var hist := []
+	for cell in cells_to_switch:
+		cell.state = !cell.state
+		hist.append(cell)
+	if len(hist) > 0:
+		cells_states_stack.append(hist)
 	emit_signal("next_generation")
 
